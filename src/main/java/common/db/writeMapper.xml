@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ac.kopo.dao.WriteDAO.WriteDAO">
+
+   
+    <insert id="insertWrite" parameterType="WriteVO">
+        INSERT INTO t_write (no,id, username, title, content)
+        VALUES (t_write_no.nextval,#{id}, #{username}, #{title}, #{content})
+    </insert>
+    
+    
+   <!-- 여기서 부터 추가  -->
+    <!-- 
+    <select id="selectOne" parameterType="string" resultType="kr.ac.kopo.vo.WriteVO">
+       select * from t_write where no= #{no}
+    </select>
+     -->
+     <resultMap type="kr.ac.kopo.vo.WriteVO" id="writeMap">
+     	<result column="photo" property="users.photo"/>     	
+     </resultMap>
+     
+     <select id="selectOne" parameterType="string" resultMap="writeMap">
+       SELECT * 
+		FROM T_WRITE w, USERS u 
+		WHERE  NO= #{no}
+		AND w.ID =u.ID
+    </select>
+</mapper>

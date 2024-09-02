@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ac.kopo.dao.UserDAO">
+
+	<resultMap type="kr.ac.kopo.vo.UserVO" id="userMap">
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+	
+	<insert id="insertUser" parameterType="kr.ac.kopo.vo.UserVO" >
+		INSERT INTO ALLUSERS@HAPPY_DB (user_id, username, password, email, phone_number)
+        VALUES (#{user_id}, #{username}, #{password}, #{email}, #{phone_number})
+	</insert>
+	
+	<select id="loginUser" resultType="kr.ac.kopo.vo.UserVO" parameterType="kr.ac.kopo.vo.UserVO">
+        SELECT * FROM ALLUSERS@HAPPY_DB
+        WHERE user_id = #{user_id} AND password = #{password}
+    </select>
+    
+    <select id="selectByNo" parameterType="int" resultType="map">
+        SELECT * FROM ALLUSERS@HAPPY_DB WHERE user_id = #{user_id}
+    </select>
+</mapper>

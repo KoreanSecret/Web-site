@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ac.kopo.dao.PostDAO">
+	<resultMap type="postVO" id="postMap">
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+    <select id="selectOne" resultType="kr.ac.kopo.vo.PostVO">
+        SELECT * FROM posts
+    </select>
+
+    <insert id="insertPost" parameterType="kr.ac.kopo.vo.PostVO">
+        INSERT INTO posts (no, id, title, content)
+        VALUES (#{no}, #{id}, #{title}, #{content})
+    </insert>
+    
+    <select id="selectAll"  resultType="kr.ac.kopo.vo.PostVO">
+        SELECT NO, title, id, username, reg_date regDate FROM T_WRITE
+    </select>
+</mapper>
